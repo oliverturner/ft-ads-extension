@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="src/panel.css" />
+  </head>
+  <body>
+    <div class="cols">
+      <div class="col" id="ad-reqs">
+        <h2>Ad server traffic</h2>
+
+        <h3>Page-level data</h3>
+        <div data-component="page-level-data"></div>
+
+        <h3>Slot-level data</h3>
+        <div data-component="slot-level-data"></div>
+
+        <details>
+          <summary>All params</summary>
+          <pre data-component="raw-requests">
+            Waiting for data...
+          </pre>
+        </details>
+      </div>
+
+      <div class="col" id="spoor-reqs">
+        <h2>Spoor requests</h2>
+
+        <div data-component="shared-data"></div>
+
+        <div data-component="events-parsed"></div>
+
+        <details>
+          <summary>Full responses</summary>
+          <pre data-component="events-raw">
+            Waiting for data...
+          </pre>
+        </details>
+      </div>
+
+      <!-- <div class="col" id="minimap"></div> -->
+    </div>
+
+    <script type="module" src="src/panel.ts"></script>
+  </body>
+</html>

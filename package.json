@@ -1,0 +1,22 @@
+{
+  "name": "ft-ads",
+  "description": "A devtools extension to analyze requests to the ad server & Spoor events",
+  "version": "1.0.0",
+  "author": "Oliver Turner",
+  "keywords": [],
+  "license": "ISC",
+  "type": "module",
+  "devDependencies": {
+    "@tsconfig/recommended": "1.0.7",
+    "@types/node": "20.14.10",
+    "chrome-types": "0.1.291",
+    "typescript": "5.5.3",
+    "vite": "5.3.3"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "vite build",
+    "dev": "vite build --watch",
+    "start": "vite"
+  }
+}
