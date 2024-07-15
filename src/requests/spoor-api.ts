@@ -10,9 +10,8 @@ function renderSharedData({ context, user }: Payload) {
   const { advert, creative, ...contextRest } = context;
 
   return `
-    <h3>Shared Data</h3>
     <ul>
-      <li>Adtech: ${advert.adtech}</li>
+      <li>Adtech: ${advert.adtech ?? "OAds"}</li>
       <li>Consents: <ul>${listify(advert.consents)}</ul></li>
       <li>User: <ul>${listify(user)}</ul></li>
       <li>Context: <ul>${listify(contextRest)}</ul></li>

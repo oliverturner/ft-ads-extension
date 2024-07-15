@@ -11,11 +11,17 @@
       <div class="col" id="ad-reqs">
         <h2>Ad server traffic</h2>
 
-        <h3>Page-level data</h3>
-        <div data-component="page-level-data"></div>
+        <div class="col__contents">
+          <div>
+            <h3>Page</h3>
+            <div data-component="page-level-data"></div>
+          </div>
 
-        <h3>Slot-level data</h3>
-        <div data-component="slot-level-data"></div>
+          <div>
+            <h3>Slots</h3>
+            <div data-component="slot-level-data"></div>
+          </div>
+        </div>
 
         <details>
           <summary>All params</summary>
@@ -28,9 +34,17 @@
       <div class="col" id="spoor-reqs">
         <h2>Spoor requests</h2>
 
-        <div data-component="shared-data"></div>
+        <div class="col__contents">
+          <div>
+            <h3>Shared</h3>
+            <div data-component="shared-data"></div>
+          </div>
 
-        <div data-component="events-parsed"></div>
+          <div>
+            <h3>Slots</h3>
+            <div data-component="events-parsed"></div>
+          </div>
+        </div>
 
         <details>
           <summary>Full responses</summary>

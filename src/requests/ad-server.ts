@@ -1,4 +1,9 @@
-import type { AdParams, CustParams, PrevScp } from "typings/gpt";
+import type {
+  AdParams,
+  CustParams,
+  PrevScp,
+  ProcessedCustParams,
+} from "typings/gpt";
 
 import { parseNestedParams } from "../utils/url";
 
@@ -154,10 +159,16 @@ export class AdsRequestTracker {
         this.#processedParams[pos] = params;
       }
 
-      const { pageLevelHtml, slotLevelHtml } = this.parseParams(this.#processedParams);
+      const { pageLevelHtml, slotLevelHtml } = this.parseParams(
+        this.#processedParams
+      );
       this.#pageLevelEl.innerHTML = pageLevelHtml;
       this.#slotLevelEl.innerHTML = slotLevelHtml;
-      this.#rawReqsEl.innerText = JSON.stringify(this.#processedParams, null, 2);
+      this.#rawReqsEl.innerText = JSON.stringify(
+        this.#processedParams,
+        null,
+        2
+      );
     }
   }
 }

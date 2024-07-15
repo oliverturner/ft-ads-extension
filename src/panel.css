@@ -9,11 +9,16 @@
 
 :where(td) {
   vertical-align: top;
+
+  & strong {
+    text-wrap: nowrap;
+  }
 }
 
 .cols {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
+  align-content: start;
   gap: 1rem;
 }
 
@@ -25,6 +30,8 @@
   overflow-x: auto;
 }
 
-[data-component="slot-level-data"] {
-  padding-inline-start: 1rem;
+.col__contents {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
 }

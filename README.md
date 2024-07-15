@@ -51,10 +51,21 @@ npm start
 
 This will launch the panel as a hot-reloading HTML page pre-loaded with sample data, allowing you to quickly tweak and refine the UI and behaviour
 
-To see the extension in action you will need to install it:
+To see the extension in action you will need to install it: follow the [instructions](#installation-from-zip) from step 3 forwards
 
-1. Run `npm run dev` to generate the `/dist` folder containing the compiled assets comprising the extension
-1. Follow the [installation instructions](#installation-from-zip) from step 3 forwards
+To see changes you made in development reflected in the extension
+
+1. Regenerate the contents of the `/dist` directory in watch mode by running
+    ```sh
+    npm run dev
+    ```
+1. Right click the body of the panel and click "Reload Frame"
+1. Refresh the page you're inspecting and scroll to trigger requests
+
+### NOTE
+Changes to `public/manifest.json` require you to **manually** refresh the extension:
+
+![Chrome Extensions Panel](docs/chrome-extensions-refresh.png)
 
 ## Release [WIP]
 
