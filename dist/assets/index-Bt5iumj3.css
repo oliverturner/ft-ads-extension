@@ -1,0 +1,1 @@
+:where(body){font-family:system-ui,Segoe UI,Roboto,Helvetica Neue,sans-serif;line-height:1.5rem}:where(h1,h2,h3,ul,p){margin:0}:where(td){vertical-align:top}.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1rem}.col{display:grid;align-content:start;gap:1rem;overflow-x:auto}[data-component=slot-level-data]{padding-inline-start:1rem}
