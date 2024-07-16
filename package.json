@@ -8,15 +8,18 @@
   "type": "module",
   "devDependencies": {
     "@tsconfig/recommended": "1.0.7",
-    "@types/node": "20.14.10",
-    "chrome-types": "0.1.291",
+    "@types/node": "20.14.11",
+    "chrome-types": "0.1.293",
     "typescript": "5.5.3",
-    "vite": "5.3.3"
+    "vite": "5.3.4"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "vite build",
     "dev": "vite build --watch",
     "start": "vite"
+  },
+  "dependencies": {
+    "@shoelace-style/shoelace": "^2.15.1"
   }
 }

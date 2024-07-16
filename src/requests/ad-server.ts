@@ -1,9 +1,4 @@
-import type {
-  AdParams,
-  CustParams,
-  PrevScp,
-  ProcessedCustParams,
-} from "typings/gpt";
+import type { AdParams, CustParams, PrevScp } from "typings/gpt";
 
 import { parseNestedParams } from "../utils/url";
 
@@ -22,28 +17,16 @@ export const custParamsKeys = [
 ] as const;
 
 export class AdsRequestTracker {
-  readonly #reqsEl: HTMLElement;
   readonly #rawReqsEl: HTMLElement;
   readonly #pageLevelEl: HTMLElement;
   readonly #slotLevelEl: HTMLElement;
 
   #processedParams = {} as Record<string, AdParams>;
 
-  constructor(reqsEl: HTMLElement | null) {
-    if (!reqsEl) {
-      throw new Error("Element not found");
-    }
-
-    this.#reqsEl = reqsEl;
-    this.#pageLevelEl = this.#reqsEl.querySelector(
-      "[data-component='page-level-data']"
-    )!;
-    this.#slotLevelEl = this.#reqsEl.querySelector(
-      "[data-component='slot-level-data']"
-    )!;
-    this.#rawReqsEl = this.#reqsEl.querySelector(
-      "[data-component='raw-requests']"
-    )!;
+  constructor() {
+    this.#pageLevelEl = document.querySelector("#page-level-data")!;
+    this.#slotLevelEl = document.querySelector("#slot-level-data")!;
+    this.#rawReqsEl = document.querySelector("#requests-raw")!;
   }
 
   processSraParams(rawParams: URLSearchParams) {

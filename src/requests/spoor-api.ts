@@ -38,24 +38,14 @@ function renderParsedEvents(events: Record<string, Payload> = {}) {
 }
 
 export class SpoorRequestTracker {
-  readonly #spoorEl: HTMLElement;
   readonly #els: Record<string, HTMLElement>;
   readonly #events: Record<string, Payload> = {};
 
-  constructor(spoorEl: HTMLElement | null) {
-    if (!spoorEl) {
-      throw new Error("Element not found");
-    }
-
-    this.#spoorEl = spoorEl;
+  constructor() {
     this.#els = {
-      sharedData: this.#spoorEl.querySelector(
-        "[data-component='shared-data']"
-      )!,
-      eventsParsed: this.#spoorEl.querySelector(
-        "[data-component='events-parsed']"
-      )!,
-      eventsRaw: this.#spoorEl.querySelector("[data-component='events-raw']")!,
+      sharedData: document.querySelector("#shared-data")!,
+      eventsParsed: document.querySelector("#events-parsed")!,
+      eventsRaw: document.querySelector("#events-raw")!,
     };
   }
 

@@ -7,55 +7,58 @@
     <link rel="stylesheet" href="src/panel.css" />
   </head>
   <body>
-    <div class="cols">
-      <div class="col" id="ad-reqs">
-        <h2>Ad server traffic</h2>
+    <sl-tab-group>
+      <sl-tab slot="nav" panel="ad-server">Ad server traffic</sl-tab>
+      <sl-tab slot="nav" panel="spoor-reqs">Spoor requests</sl-tab>
 
-        <div class="col__contents">
-          <div>
-            <h3>Page</h3>
-            <div data-component="page-level-data"></div>
+      <sl-tab-panel name="ad-server">
+        <div class="panel">
+          <div class="cols" id="ad-reqs">
+            <div class="col">
+              <sl-card>
+                <div slot="header"><h3>Page</h3></div>
+                <div id="page-level-data"></div>
+              </sl-card>
+
+              <sl-card>
+                <div slot="header"><h3>Slots</h3></div>
+                <div id="slot-level-data"></div>
+              </sl-card>
+            </div>
           </div>
 
-          <div>
-            <h3>Slots</h3>
-            <div data-component="slot-level-data"></div>
-          </div>
+          <sl-details summary="All params">
+            <sl-copy-button from="requests-raw"></sl-copy-button>
+
+            <pre id="requests-raw">Waiting for data...</pre>
+          </sl-details>
         </div>
+      </sl-tab-panel>
 
-        <details>
-          <summary>All params</summary>
-          <pre data-component="raw-requests">
-            Waiting for data...
-          </pre>
-        </details>
-      </div>
+      <sl-tab-panel name="spoor-reqs">
+        <div class="panel">
+          <div class="cols" id="spoor-reqs">
+            <div class="col">
+              <sl-card>
+                <div slot="header"><h3>Shared</h3></div>
+                <div id="shared-data"></div>
+              </sl-card>
 
-      <div class="col" id="spoor-reqs">
-        <h2>Spoor requests</h2>
-
-        <div class="col__contents">
-          <div>
-            <h3>Shared</h3>
-            <div data-component="shared-data"></div>
+              <sl-card>
+                <div slot="header"><h3>Slots</h3></div>
+                <div id="events-parsed"></div>
+              </sl-card>
+            </div>
           </div>
 
-          <div>
-            <h3>Slots</h3>
-            <div data-component="events-parsed"></div>
-          </div>
+          <sl-details summary="Full responses">
+            <sl-copy-button from="events-raw"></sl-copy-button>
+
+            <pre id="events-raw">Waiting for data...</pre>
+          </sl-details>
         </div>
-
-        <details>
-          <summary>Full responses</summary>
-          <pre data-component="events-raw">
-            Waiting for data...
-          </pre>
-        </details>
-      </div>
-
-      <!-- <div class="col" id="minimap"></div> -->
-    </div>
+      </sl-tab-panel>
+    </sl-tab-group>
 
     <script type="module" src="src/panel.ts"></script>
   </body>
