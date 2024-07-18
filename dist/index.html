@@ -4,26 +4,31 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <script type="module" crossorigin src="/assets/index-D8B29Rzg.js"></script>
+    <script type="module" crossorigin src="/assets/index-BI0Rv27B.js"></script>
     <link rel="stylesheet" crossorigin href="/assets/index-BZgLhpib.css">
   </head>
   <body>
     <sl-tab-group>
       <sl-tab slot="nav" panel="ad-server">Ad server traffic</sl-tab>
-      <sl-tab slot="nav" panel="spoor-reqs">Spoor requests</sl-tab>
+      <sl-tab slot="nav" panel="spoor-reqs">Spoor traffic</sl-tab>
+      <sl-tab slot="nav" panel="page-events">Page events</sl-tab>
 
       <sl-tab-panel name="ad-server">
         <div class="panel">
-          <div class="cols" id="ad-reqs">
+          <div class="cols">
             <div class="col">
               <sl-card>
                 <div slot="header"><h3>Page</h3></div>
-                <div id="page-level-data"></div>
+                <div id="page-level-data">
+                  <div id="shared-data">Waiting for data...</div>
+                </div>
               </sl-card>
 
               <sl-card>
                 <div slot="header"><h3>Slots</h3></div>
-                <div id="slot-level-data"></div>
+                <div id="slot-level-data">
+                  <div id="shared-data">Waiting for data...</div>
+                </div>
               </sl-card>
             </div>
           </div>
@@ -38,16 +43,16 @@
 
       <sl-tab-panel name="spoor-reqs">
         <div class="panel">
-          <div class="cols" id="spoor-reqs">
+          <div class="cols">
             <div class="col">
               <sl-card>
                 <div slot="header"><h3>Shared</h3></div>
-                <div id="shared-data"></div>
+                <div id="shared-data">Waiting for data...</div>
               </sl-card>
 
               <sl-card>
                 <div slot="header"><h3>Slots</h3></div>
-                <div id="events-parsed"></div>
+                <div id="events-parsed">Waiting for events...</div>
               </sl-card>
             </div>
           </div>
@@ -57,6 +62,15 @@
 
             <pre id="events-raw">Waiting for data...</pre>
           </sl-details>
+        </div>
+      </sl-tab-panel>
+
+      <sl-tab-panel name="page-events">
+        <div class="panel">
+          <sl-card>
+            <div slot="header"><h3>Page events</h3></div>
+            <div id="page-events">Waiting for events...</div>
+          </sl-card>
         </div>
       </sl-tab-panel>
     </sl-tab-group>

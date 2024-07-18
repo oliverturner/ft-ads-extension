@@ -37,7 +37,7 @@ function renderParsedEvents(events: Record<string, Payload> = {}) {
   `;
 }
 
-export class SpoorRequestTracker {
+export class SpoorRequestPanel {
   readonly #els: Record<string, HTMLElement>;
   readonly #events: Record<string, Payload> = {};
 

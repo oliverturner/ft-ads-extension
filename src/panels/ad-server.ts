@@ -16,7 +16,7 @@ export const custParamsKeys = [
   "res",
 ] as const;
 
-export class AdsRequestTracker {
+export class AdsRequestPanel {
   readonly #rawReqsEl: HTMLElement;
   readonly #pageLevelEl: HTMLElement;
   readonly #slotLevelEl: HTMLElement;
