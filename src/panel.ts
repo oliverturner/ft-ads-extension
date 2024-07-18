@@ -7,12 +7,20 @@ import { SpoorRequestTracker } from "./requests/spoor-api";
 const adsRequestTracker = new AdsRequestTracker();
 const spoorRequestTracker = new SpoorRequestTracker();
 
+function updateDevToolsPanel() {
+  adsRequestTracker.refresh();
+  spoorRequestTracker.refresh();
+}
+
 // @ts-expect-error chrome-types is wrong
 chrome.devtools?.network.onRequestFinished.addListener(function ({ request }) {
   adsRequestTracker.onRequestFinished(request);
   spoorRequestTracker.onRequestFinished(request);
 });
 
+chrome.devtools.network.onNavigated.addListener(updateDevToolsPanel);
+
+// Load fixture data in development mode
 if (import.meta.env.MODE === "development") {
   const requests = await import("./__fixtures__/requests/pg/home");
   adsRequestTracker.onRequestFinished({ url: requests.ads } as any);

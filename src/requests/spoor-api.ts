@@ -67,4 +67,10 @@ export class SpoorRequestTracker {
       this.#els.eventsRaw.innerText = JSON.stringify(this.#events, null, 2);
     }
   }
+
+  refresh() {
+    for (const el of Object.values(this.#els)) {
+      el.innerHTML = "";
+    }
+  }
 }

@@ -154,4 +154,10 @@ export class AdsRequestTracker {
       );
     }
   }
+
+  refresh() {
+    this.#pageLevelEl.innerHTML = "";
+    this.#slotLevelEl.innerHTML = "";
+    this.#rawReqsEl.innerText = "";
+  }
 }
