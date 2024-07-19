@@ -1,5 +1,7 @@
 # FT Ads
 
+![FT Ads Tab](docs/devtools-tab.png)
+
 ## Overview
 
 FT Ads is a Chrome extension intended to give users at-a-glance access to ads-related traffic properties.
@@ -31,6 +33,14 @@ The unedited raw data is viewable in the disclosure element at the foot of each 
 With these steps taken you should now see the extension show up:
 
 ![Chrome Extensions Panel](docs/chrome-extensions-panel.png)
+
+### Updating
+
+1. Delete the existing extension folder
+1. Follow steps 1 to 3 above
+1. Click the refresh icon
+
+![Chrome Extensions Panel](docs/chrome-extensions-refresh.png)
 
 ## Usage
 
