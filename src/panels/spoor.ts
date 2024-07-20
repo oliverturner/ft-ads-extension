@@ -1,6 +1,7 @@
 import type { Payload } from "typings/spoor";
 
 import { listify } from "../utils/html";
+import { Panel } from "./_panel";
 
 const SPOOR_URL = "https://spoor-api.ft.com/ingest";
 const SPOOR_URL_AD_REQUESTED = `${SPOOR_URL}?type=ads:slot-requested`;
@@ -37,40 +38,49 @@ function renderParsedEvents(events: Record<string, Payload> = {}) {
   `;
 }
 
-export class SpoorRequestPanel {
-  readonly #els: Record<string, HTMLElement>;
-  readonly #events: Record<string, Payload> = {};
+type ElKeys = keyof typeof SpoorPanel.elMap;
+
+export class SpoorPanel extends Panel {
+  #events: Record<string, Payload> = {};
+  #isInitialRequest = true;
+
+  static elMap = {
+    sharedData: "shared-data",
+    eventsParsed: "events-parsed",
+    eventsRaw: "events-raw",
+  } as const;
+
+  els: Record<ElKeys, HTMLElement>;
 
   constructor() {
-    this.#els = {
-      sharedData: document.querySelector("#shared-data")!,
-      eventsParsed: document.querySelector("#events-parsed")!,
-      eventsRaw: document.querySelector("#events-raw")!,
-    };
+    super("panel-spoor");
+    this.els = this.initEls<ElKeys>(SpoorPanel.elMap);
   }
 
   // @ts-expect-error chrome-types is wrong
   onRequestFinished({ url, postData }: chrome.devtools.network.Request) {
-    if (
-      url.startsWith(SPOOR_URL_AD_REQUESTED) ||
-      url.startsWith(SPOOR_URL_AD_RENDERED)
-    ) {
-      const data = JSON.parse(postData.text);
-      const { pos } = data.context.creative;
+    try {
+      if (url.startsWith(SPOOR_URL_AD_REQUESTED) || url.startsWith(SPOOR_URL_AD_RENDERED)) {
+        const data = JSON.parse(postData.text);
+        const { pos } = data.context.creative;
 
-      if (this.#els.sharedData?.innerText === "") {
-        this.#els.sharedData.innerHTML = renderSharedData(data);
+        if (this.#isInitialRequest) {
+          this.#isInitialRequest = false;
+          this.els.sharedData.innerHTML = renderSharedData(data);
+        }
+
+        this.#events[pos] = data;
+        this.els.eventsParsed.innerHTML = renderParsedEvents(this.#events);
+        this.els.eventsRaw.innerText = JSON.stringify(this.#events, null, 2);
       }
-
-      this.#events[pos] = data;
-      this.#els.eventsParsed.innerHTML = renderParsedEvents(this.#events);
-      this.#els.eventsRaw.innerText = JSON.stringify(this.#events, null, 2);
+    } catch (error) {
+      console.error("SpoorPanel.onRequestFinished", error);
     }
   }
 
   refresh() {
-    for (const el of Object.values(this.#els)) {
-      el.innerHTML = "";
-    }
+    this.#events = {};
+    this.#isInitialRequest = true;
+    this.clearEls();
   }
 }

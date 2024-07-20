@@ -1,6 +1,9 @@
 import type { AdParams, CustParams, PrevScp } from "typings/gpt";
 
 import { parseNestedParams } from "../utils/url";
+import { Panel } from "./_panel";
+
+type ElKeys = keyof typeof GAMPanel.elMap;
 
 export const custParamsKeys = [
   "auuid",
@@ -16,17 +19,21 @@ export const custParamsKeys = [
   "res",
 ] as const;
 
-export class AdsRequestPanel {
-  readonly #rawReqsEl: HTMLElement;
-  readonly #pageLevelEl: HTMLElement;
-  readonly #slotLevelEl: HTMLElement;
+export class GAMPanel extends Panel {
+  static elMap = {
+    pageLevel: "page-level-data",
+    slotLevel: "slot-level-data",
+    requestsRaw: "requests-raw",
+  } as const;
+
+  els: Record<ElKeys, HTMLElement>;
 
   #processedParams = {} as Record<string, AdParams>;
 
   constructor() {
-    this.#pageLevelEl = document.querySelector("#page-level-data")!;
-    this.#slotLevelEl = document.querySelector("#slot-level-data")!;
-    this.#rawReqsEl = document.querySelector("#requests-raw")!;
+    super("panel-gam");
+
+    this.els = this.initEls<ElKeys>(GAMPanel.elMap);
   }
 
   processSraParams(rawParams: URLSearchParams) {
@@ -130,34 +137,27 @@ export class AdsRequestPanel {
 
   // @ts-expect-error chrome-types is wrong
   onRequestFinished({ url: rawUrl }: chrome.devtools.network.Request) {
-    if (rawUrl.includes("/gampad/ads")) {
-      const url = new URL(rawUrl);
-      const isSra = url.searchParams.get("prev_scp")?.includes("|");
+    try {
+      if (rawUrl.includes("/gampad/ads")) {
+        const url = new URL(rawUrl);
+        const isSra = url.searchParams.get("prev_scp")?.includes("|");
 
-      if (isSra) {
-        this.#processedParams = this.processSraParams(url.searchParams);
-      } else {
-        const params = this.processMraParams(url.searchParams);
-        const { pos } = params.prev_scp ?? { pos: "unknown" };
-        this.#processedParams[pos] = params;
+        if (isSra) {
+          this.#processedParams = this.processSraParams(url.searchParams);
+        } else {
+          const params = this.processMraParams(url.searchParams);
+          const { pos } = params.prev_scp ?? { pos: "unknown" };
+          this.#processedParams[pos] = params;
+        }
+
+        const { pageLevelHtml, slotLevelHtml } = this.parseParams(this.#processedParams);
+
+        this.els.pageLevel.innerHTML = pageLevelHtml;
+        this.els.slotLevel.innerHTML = slotLevelHtml;
+        this.els.requestsRaw.innerText = JSON.stringify(this.#processedParams, null, 2);
       }
-
-      const { pageLevelHtml, slotLevelHtml } = this.parseParams(
-        this.#processedParams
-      );
-      this.#pageLevelEl.innerHTML = pageLevelHtml;
-      this.#slotLevelEl.innerHTML = slotLevelHtml;
-      this.#rawReqsEl.innerText = JSON.stringify(
-        this.#processedParams,
-        null,
-        2
-      );
+    } catch (error) {
+      console.error("GAMPanel.onRequestFinished", error);
     }
-  }
-
-  refresh() {
-    this.#pageLevelEl.innerHTML = "";
-    this.#slotLevelEl.innerHTML = "";
-    this.#rawReqsEl.innerText = "";
   }
 }

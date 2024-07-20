@@ -1,18 +1,18 @@
 import "@shoelace-style/shoelace";
 import "@shoelace-style/shoelace/dist/themes/light.css";
 
-import { AdsRequestPanel } from "./panels/ad-server";
-import { SpoorRequestPanel } from "./panels/spoor-api";
-import { PageEventsPanel } from "./panels/page-events";
+import { GAMPanel } from "./panels/gam";
+import { SpoorPanel } from "./panels/spoor";
+// import { PagePanel } from "./panels/page";
 
-const adsRequestPanel = new AdsRequestPanel();
-const spoorRequestPanel = new SpoorRequestPanel();
-const pageEventsPanel = new PageEventsPanel();
+const gamPanel = new GAMPanel();
+const spoorPanel = new SpoorPanel();
+// const pageEventsPanel = new PagePanel();
 
 function updateDevToolsPanel() {
-  adsRequestPanel.refresh();
-  spoorRequestPanel.refresh();
-  pageEventsPanel.refresh();
+  gamPanel.refresh();
+  spoorPanel.refresh();
+  // pageEventsPanel.refresh();
 }
 
 chrome.devtools?.inspectedWindow.eval(
@@ -29,8 +29,8 @@ chrome.devtools?.inspectedWindow.eval(
 
 // @ts-expect-error chrome-types is wrong
 chrome.devtools?.network.onRequestFinished.addListener(function ({ request }) {
-  adsRequestPanel.onRequestFinished(request);
-  spoorRequestPanel.onRequestFinished(request);
+  gamPanel.onRequestFinished(request);
+  spoorPanel.onRequestFinished(request);
 });
 
 chrome.devtools?.network.onNavigated.addListener(updateDevToolsPanel);
@@ -38,10 +38,10 @@ chrome.devtools?.network.onNavigated.addListener(updateDevToolsPanel);
 // Load fixture data in development mode
 if (import.meta.env.MODE === "development") {
   const requests = await import("./__fixtures__/requests/pg/home");
-  adsRequestPanel.onRequestFinished({ url: requests.ads } as any);
+  gamPanel.onRequestFinished({ url: requests.ads } as any);
 
   for (const request of requests.spoor) {
-    spoorRequestPanel.onRequestFinished({
+    spoorPanel.onRequestFinished({
       url: request.url,
       postData: { text: JSON.stringify(request.postData) },
     } as any);
