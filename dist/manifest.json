@@ -9,5 +9,12 @@
     "48": "icons/icon-48.png",
     "128": "icons/icon-128.png"
   },
-  "devtools_page": "devtools.html"
+  "devtools_page": "devtools.html",
+  "content_scripts": [
+    {
+      "matches": ["https://*.ft.com/*"],
+      "js": ["content.js"],
+      "world": "MAIN"
+    }
+  ]
 }
