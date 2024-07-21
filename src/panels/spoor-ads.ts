@@ -1,13 +1,10 @@
-import type { Payload } from "typings/spoor";
+import type { SpoorPayloadAds } from "typings/spoor";
 
 import { listify } from "../utils/html";
+import * as constants from "../lib/constants";
 import { Panel } from "./_panel";
 
-const SPOOR_URL = "https://spoor-api.ft.com/ingest";
-const SPOOR_URL_AD_REQUESTED = `${SPOOR_URL}?type=ads:slot-requested`;
-const SPOOR_URL_AD_RENDERED = `${SPOOR_URL}?type=ads:slot-rendered`;
-
-function renderSharedData({ context, user }: Payload) {
+function renderSharedData({ context, user }: SpoorPayloadAds) {
   const { advert, creative, ...contextRest } = context;
 
   return `
@@ -20,7 +17,7 @@ function renderSharedData({ context, user }: Payload) {
   `;
 }
 
-function renderParsedEvents(events: Record<string, Payload> = {}) {
+function renderParsedEvents(events: Record<string, SpoorPayloadAds> = {}) {
   const eventList = [];
   for (const [k, v] of Object.entries(events)) {
     eventList.push(`
@@ -38,10 +35,10 @@ function renderParsedEvents(events: Record<string, Payload> = {}) {
   `;
 }
 
-type ElKeys = keyof typeof SpoorPanel.elMap;
+type ElKeys = keyof typeof SpoorAdsPanel.elMap;
 
-export class SpoorPanel extends Panel {
-  #events: Record<string, Payload> = {};
+export class SpoorAdsPanel extends Panel {
+  #spoorEvents: Record<string, SpoorPayloadAds> = {};
   #isInitialRequest = true;
 
   static elMap = {
@@ -53,14 +50,17 @@ export class SpoorPanel extends Panel {
   els: Record<ElKeys, HTMLElement>;
 
   constructor() {
-    super("panel-spoor");
-    this.els = this.initEls<ElKeys>(SpoorPanel.elMap);
+    super("panel-spoor-ads");
+    this.els = this.initEls<ElKeys>(SpoorAdsPanel.elMap);
   }
 
   // @ts-expect-error chrome-types is wrong
   onRequestFinished({ url, postData }: chrome.devtools.network.Request) {
     try {
-      if (url.startsWith(SPOOR_URL_AD_REQUESTED) || url.startsWith(SPOOR_URL_AD_RENDERED)) {
+      if (
+        url.startsWith(constants.SPOOR_URL_AD_REQUESTED) ||
+        url.startsWith(constants.SPOOR_URL_AD_RENDERED)
+      ) {
         const data = JSON.parse(postData.text);
         const { pos } = data.context.creative;
 
@@ -69,9 +69,9 @@ export class SpoorPanel extends Panel {
           this.els.sharedData.innerHTML = renderSharedData(data);
         }
 
-        this.#events[pos] = data;
-        this.els.eventsParsed.innerHTML = renderParsedEvents(this.#events);
-        this.els.eventsRaw.innerText = JSON.stringify(this.#events, null, 2);
+        this.#spoorEvents[pos] = data;
+        this.els.eventsParsed.innerHTML = renderParsedEvents(this.#spoorEvents);
+        this.els.eventsRaw.innerText = JSON.stringify(this.#spoorEvents, null, 2);
       }
     } catch (error) {
       console.error("SpoorPanel.onRequestFinished", error);
@@ -79,7 +79,7 @@ export class SpoorPanel extends Panel {
   }
 
   refresh() {
-    this.#events = {};
+    this.#spoorEvents = {};
     this.#isInitialRequest = true;
     this.clearEls();
   }

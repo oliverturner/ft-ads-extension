@@ -7,7 +7,8 @@
     "useDefineForClassFields": true,
     "skipLibCheck": true,
 
-    "types": ["vite/client", "chrome-types"],
+    "allowJs": true,
+    "types": ["vite/client", "chrome-types", "@types/google-publisher-tag"],
 
     /* Bundler mode */
     "moduleResolution": "bundler",

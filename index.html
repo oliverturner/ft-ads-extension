@@ -4,13 +4,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="src/panel.css" />
+    <link rel="stylesheet" href="src/styles/panel.css" />
+    <link rel="stylesheet" href="src/styles/timeline.css" />
   </head>
   <body>
     <sl-tab-group>
-      <sl-tab slot="nav" panel="panel-gam">GAM traffic</sl-tab>
-      <sl-tab slot="nav" panel="panel-spoor">Spoor traffic</sl-tab>
-      <sl-tab slot="nav" panel="panel-page">Page events</sl-tab>
+      <sl-tab slot="nav" panel="panel-gam">GAM</sl-tab>
+      <sl-tab slot="nav" panel="panel-spoor-ads">Spoor: Ads</sl-tab>
+      <sl-tab slot="nav" panel="panel-spoor-page">Spoor: Page</sl-tab>
+      <!--
+      <sl-tab slot="nav" panel="panel-consent">Consent</sl-tab>
+      -->
 
       <!-- Ad server -->
       <sl-tab-panel name="panel-gam">
@@ -39,7 +43,7 @@
       </sl-tab-panel>
 
       <!-- Spoor -->
-      <sl-tab-panel name="panel-spoor">
+      <sl-tab-panel name="panel-spoor-ads">
         <div class="panel">
           <div class="cols">
             <div class="col">
@@ -65,14 +69,39 @@
       </sl-tab-panel>
 
       <!-- Page events -->
-      <sl-tab-panel name="page-events">
+      <sl-tab-panel name="panel-spoor-page">
+        <div class="panel">
+          <div class="cols">
+            <div class="col">
+              <sl-card>
+                <div slot="header"><h3>Page events</h3></div>
+                <ol data-component="events" class="timeline" role="list">
+                  Waiting for events...
+                </ol>
+              </sl-card>
+            </div>
+            <div class="col">
+              <sl-card>
+                <div slot="header"><h3>Event data</h3></div>
+                <pre data-component="event-data"></pre>
+              </sl-card>
+            </div>
+          </div>
+        </div>
+      </sl-tab-panel>
+
+      <!--
+
+      <-- Consent --\>
+      <sl-tab-panel name="panel-consent">
         <div class="panel">
           <sl-card>
-            <div slot="header"><h3>Page events</h3></div>
-            <div data-component="page-events">Waiting for events...</div>
+            <div slot="header"><h3>Consent</h3></div>
+            <p>Coming soon...</p>
           </sl-card>
         </div>
       </sl-tab-panel>
+      -->
     </sl-tab-group>
 
     <script type="module" src="src/panel.ts"></script>

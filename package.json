@@ -8,6 +8,7 @@
   "type": "module",
   "devDependencies": {
     "@tsconfig/recommended": "1.0.7",
+    "@types/google-publisher-tag": "1.20240701.0",
     "@types/node": "20.14.11",
     "chrome-types": "0.1.293",
     "typescript": "5.5.3",
