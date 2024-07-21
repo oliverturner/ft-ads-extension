@@ -1,0 +1,79 @@
+:where(*, *::before, *::after) {
+  box-sizing: border-box;
+}
+
+:where(html, body) {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+:where(body) {
+  font-family: system-ui, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  line-height: 1.5rem;
+}
+
+:where(h1, h2, h3, ul, p) {
+  margin: 0;
+}
+
+:where(td) {
+  vertical-align: top;
+
+  & strong {
+    text-wrap: nowrap;
+  }
+}
+
+/* Shoelace overrides
+------------------------------------------------------------------------------------------------- */
+sl-tab-group {
+  height: 100%;
+  /* overflow: hidden; */
+}
+
+sl-tab-panel {
+  padding: 0 1rem;
+}
+
+sl-details {
+  max-width: 100%;
+  overflow-x: auto;
+  margin: 0;
+}
+
+/* Custom classes
+------------------------------------------------------------------------------------------------- */
+.panel {
+  display: grid;
+  gap: 1rem;
+}
+
+.cols {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
+  grid-template-rows: 1fr;
+  align-content: start;
+  gap: 1rem;
+
+  max-height: 100%;
+}
+
+.col {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  align-content: start;
+  gap: 1rem;
+
+  overflow: auto;
+}
+
+.raw {
+  position: relative;
+
+  & sl-copy-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+}
