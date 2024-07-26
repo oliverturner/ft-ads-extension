@@ -35,9 +35,9 @@ googletag.cmd.push(() => {
   });
 });
 
-setTimeout(() => {
-  console.log("⛳️ content.js", {
-    cmd: window.googletag.cmd,
-    pubads: window.googletag.pubads,
-  });
-}, 2000);
+// setTimeout(() => {
+//   console.log("⛳️ content.js", {
+//     cmd: window.googletag.cmd,
+//     pubads: window.googletag.pubads,
+//   });
+// }, 2000);

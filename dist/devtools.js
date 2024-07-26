@@ -1,6 +1,5 @@
 let portDev, portTab;
 
-const tabId = chrome.devtools.inspectedWindow.tabId;
 const onDevMessage = (msg) => {
   portTab.postMessage(msg);
   return true;
@@ -10,16 +9,28 @@ const onTabMessage = (msg) => {
   return true;
 };
 
-chrome.runtime.onConnect.addListener(function onDevConnect(port) {
-  if (+port.name !== tabId) return;
+function onDevConnect(port) {
+  console.log("onDevConnect", port);
 
-  portDev = port;
-  portDev.onMessage.addListener(onDevMessage);
+  try {
+    const { tabId } = chrome.devtools?.inspectedWindow ?? {};
 
-  portTab = chrome.tabs.connect(tabId, { name: "dev" });
-  portTab.onMessage.addListener(onTabMessage);
+    console.log("tabId", tabId);
 
-  return true;
-});
+    if (+port.name !== tabId) return;
+
+    portDev = port;
+    portDev.onMessage.addListener(onDevMessage);
+
+    portTab = chrome.tabs.connect(tabId, { name: "dev" });
+    portTab.onMessage.addListener(onTabMessage);
+
+    return true;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// chrome.runtime.onConnect.addListener(onDevConnect);
 
 chrome.devtools.panels.create("FT Ads", "icons/icon-16.png", "index.html");
