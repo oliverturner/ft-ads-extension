@@ -1,0 +1,106 @@
+:root {
+  --o-colors-page-background: #fff1e5;
+  --o-colors-box-background: #f2dfce;
+  --o-colors-body-text: #33302e;
+  --o-colors-muted-text: #ccc1b7;
+  --o-colors-link-text: #0d7680;
+  --o-colors-link-hover-text: #08474d;
+
+  --o-colors-black: #000;
+  --o-colors-white: #fff;
+  --o-colors-ft-pink: #fcd0b1;
+  --o-colors-ft-grey: #333;
+
+  --o-colors-candy: #ff7faa;
+  --o-colors-claret: #990f3d;
+  --o-colors-crimson: #c00;
+  --o-colors-paper: #fff1e5;
+  --o-colors-mandarin: #f83;
+  --o-colors-light-blue: #00a0dd;
+  --o-colors-graphics-dark-blue: #006f9b;
+  --o-colors-jade: #00994d;
+  --o-colors-lemon: #ffec1a;
+  --o-colors-mint: #c0efd8;
+  --o-colors-oxford: #0f5499;
+  --o-colors-sky: #cce6ff;
+  --o-colors-slate: #262a33;
+  --o-colors-teal: #0d7680;
+  --o-colors-wasabi: #96cc28;
+  --o-colors-wheat: #f2dfce;
+  --o-colors-velvet: #593380;
+
+  --o-colors-org-b2c: #4e96eb;
+  --o-colors-org-b2c-dark: #3a70af;
+  --o-colors-org-b2c-light: #99c6fb;
+  --o-colors-matisse: #355778;
+  --o-colors-transparent: transparent;
+
+  --o-colors-black-5: #f2e5da;
+  --o-colors-black-10: #e6d9ce;
+  --o-colors-black-20: #ccc1b7;
+  --o-colors-black-30: #b3a9a0;
+  --o-colors-black-40: #999189;
+  --o-colors-black-50: #807973;
+  --o-colors-black-60: #66605c;
+  --o-colors-black-70: #4d4845;
+  --o-colors-black-80: #33302e;
+  --o-colors-black-90: #1a1817;
+
+  --o-colors-white-10: #fff2e8;
+  --o-colors-white-20: #fff4ea;
+  --o-colors-white-40: #fff7ef;
+  --o-colors-white-60: #fff9f5;
+  --o-colors-white-80: #fffcfa;
+
+  --o-colors-claret-30: #4d081f;
+  --o-colors-claret-40: #660a29;
+  --o-colors-claret-50: #800d33;
+  --o-colors-claret-60: #990f3d;
+  --o-colors-claret-70: #b31247;
+  --o-colors-claret-80: #cc1451;
+  --o-colors-claret-90: #e6175c;
+  --o-colors-claret-100: #ff1966;
+
+  --o-colors-oxford-30: #082a4d;
+  --o-colors-oxford-40: #0a3866;
+  --o-colors-oxford-50: #0d4680;
+  --o-colors-oxford-60: #0f5499;
+  --o-colors-oxford-70: #1262b3;
+  --o-colors-oxford-80: #1470cc;
+  --o-colors-oxford-90: #177ee6;
+  --o-colors-oxford-100: #198cff;
+
+  --o-colors-teal-20: #052f33;
+  --o-colors-teal-30: #08474d;
+  --o-colors-teal-40: #0a5e66;
+  --o-colors-teal-50: #0d7680;
+  --o-colors-teal-60: #108d99;
+  --o-colors-teal-70: #12a5b3;
+  --o-colors-teal-80: #15bccc;
+  --o-colors-teal-90: #17d4e6;
+  --o-colors-teal-100: #1aebff;
+
+  --o-colors-mint-30: #3d4d45;
+  --o-colors-mint-40: #52665c;
+  --o-colors-mint-50: #668073;
+  --o-colors-mint-60: #7b998a;
+  --o-colors-mint-70: #8fb3a1;
+  --o-colors-mint-80: #a4ccb8;
+
+  --o-colors-wheat-100: #ffebd9;
+}
+
+:where(h1, h2, h3, h4, h5, h6, p, ul) {
+  margin: 0;
+}
+
+:where(button) {
+  all: unset;
+  cursor: pointer;
+}
+
+body {
+  margin: 0;
+  background-color: var(--o-colors-page-background);
+  color: var(--o-colors-body-text);
+}
