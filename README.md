@@ -6,9 +6,13 @@
 
 FT Ads is a Chrome extension intended to give users at-a-glance access to ads-related traffic properties.
 
-Both Multi- (OAds) and Single Request Architectures (PG) are supported.
-
 ## Features
+
+### Inspect slot config
+
+- See information about the page-level and slot-level targeting
+- Click directly through to line items and creatives in GAM
+- See the sizes a slot is configured to support, as well as the size it actually rendered at
 
 ### Inspect Ad Server requests
 
@@ -22,11 +26,11 @@ The unedited raw data is viewable in the disclosure element at the foot of each 
 
 ## Installation from ZIP
 
-1. Download https://github.com/oliverturner/ft-ads-extension/archive/refs/heads/main.zip
-2. Unpack the zip file and move the resulting directory into a location of your choice. Note that it contains a folder named `/dist`
+1. Visit https://github.com/oliverturner/ft-ads-extension and click into the `.output` directory. Click the zip file it contains to download it.
+2. Unpack the zip file and move the resulting directory into a location of your choice.
 3. Open Chrome's Manage Extensions page by copying and pasting `chrome://extensions` into a new Chrome tab
 4. Enable "Developer mode"
-5. Click "Load unpacked", navigate to the `/dist` folder and click "Select"
+5. Click "Load unpacked", navigate to the unzipped folder and click "Select"
 
 ![Chrome Extensions Panel](docs/chrome-extensions-dist.png)
 
@@ -56,26 +60,12 @@ With the extension installed...
 To start the project, run:
 
 ```sh
-npm start
+npm run dev
 ```
 
-This will launch the panel as a hot-reloading HTML page pre-loaded with sample data, allowing you to quickly tweak and refine the UI and behaviour
+This opens a Chrome window with the extension pre-installed and navigates to ft.com.
 
-To see the extension in action you will need to install it: follow the [instructions](#installation-from-zip) from step 3 forwards
-
-To see changes you made in development reflected in the extension
-
-1. Regenerate the contents of the `/dist` directory in watch mode by running
-    ```sh
-    npm run dev
-    ```
-1. Right click the body of the panel and click "Reload Frame"
-1. Refresh the page you're inspecting and scroll to trigger requests
-
-### NOTE
-Changes to `public/manifest.json` require you to **manually** refresh the extension:
-
-![Chrome Extensions Panel](docs/chrome-extensions-refresh.png)
+Open the web inspector and select the tab labeled "FT Ads" to see slot information
 
 ## Release [WIP]
 
@@ -95,7 +85,4 @@ This extension is yet to be published on the Chrome Store.
 
 - [ ] Playwright tests
 - [ ] More compact layout
-- [ ] Better parity with [Google Publisher Console](https://developers.google.com/publisher-tag/guides/publisher-console): link out to
-  - Line item
-  - Creative detail
-  - Delivery diagnostics
+- [ ] Support for OAds
