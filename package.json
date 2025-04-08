@@ -1,26 +1,36 @@
 {
   "name": "ft-ads",
-  "description": "A devtools extension to analyze requests to the ad server & Spoor events",
-  "version": "1.0.0",
-  "author": "Oliver Turner",
-  "keywords": [],
-  "license": "ISC",
+  "description": "An extension to inspect ads on FT.com",
+  "private": true,
+  "version": "0.0.0",
   "type": "module",
   "devDependencies": {
-    "@tsconfig/recommended": "1.0.7",
-    "@types/google-publisher-tag": "1.20240701.0",
-    "@types/node": "20.14.11",
-    "chrome-types": "0.1.293",
-    "typescript": "5.5.3",
-    "vite": "5.3.4"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "vite build",
-    "dev": "vite build --watch",
-    "start": "vite"
+    "@sveltejs/vite-plugin-svelte-inspector": "4.0.1",
+    "@tsconfig/svelte": "5.0.4",
+    "@types/chrome": "^0.0.313",
+    "@types/google-publisher-tag": "1.20250210.0",
+    "@wxt-dev/auto-icons": "1.0.2",
+    "@wxt-dev/module-svelte": "2.0.3",
+    "svelte": "5.25.6",
+    "svelte-check": "4.1.5",
+    "tslib": "2.8.1",
+    "typescript": "^5.8.3",
+    "wxt": "0.20.0"
   },
   "dependencies": {
-    "@shoelace-style/shoelace": "^2.15.1"
+    "@iabtcf/core": "1.5.6",
+    "debounce-fn": "6.0.0",
+    "melt": "0.28.2"
+  },
+  "scripts": {
+    "build": "wxt build",
+    "build:firefox": "wxt build -b firefox",
+    "compile": "tsc --noEmit",
+    "dev": "wxt",
+    "dev:firefox": "wxt -b firefox",
+    "svelte:check": "svelte-check",
+    "zip": "wxt zip",
+    "zip:firefox": "wxt zip -b firefox",
+    "postinstall": "wxt prepare"
   }
 }
