@@ -4,11 +4,35 @@
   const state: GAMStateProps = $props();
 
   const params = $derived.by(() => {
-    return filterVisible(state.params, "gam");
+    try {
+      const params = filterVisible(state.params, "gam");
+      const { dids, iu_parts, prev_iu_szs, prev_scp, ...raw } =
+        params.visible as Record<string, string>;
+      const parsed: Record<string, string[] | string> = {};
+      parsed.dids = dids?.split("~") ?? [];
+      parsed.iu_parts = iu_parts?.split(",") ?? [];
+      parsed.prev_iu_szs = prev_iu_szs?.split(",") ?? [];
+      parsed.prev_scp = prev_scp?.split("|") ?? [];
+
+      params.visible = { ...parsed, ...raw };
+
+      return params;
+    } catch (error) {
+      console.error("Error parsing GAM params", error);
+    }
+
+    return {
+      visible: {},
+      hidden: {},
+    };
   });
   const custParams = $derived.by(() => {
     return filterVisible(state.custParams, "gamCustParams");
   });
+
+  const objectKeys = {
+    params: ["dids", "iu_parts", "prev_iu_szs", "prev_scp"],
+  };
 </script>
 
 <div class="request">
@@ -21,9 +45,20 @@
       <h2>Params</h2>
       <ul>
         {#each Object.entries(params.visible) as [key, value] (key)}
-          <li>
-            {key}: {value}
-          </li>
+          {#if objectKeys.params.includes(key)}
+            <li>
+              {key}:
+              <ul>
+                {#each (value as string[]) as item}
+                  <li>{item}</li>
+                {/each}
+              </ul>
+            </li>
+          {:else}
+            <li>
+              {key}: {value}
+            </li>
+          {/if}
         {/each}
       </ul>
       <details>

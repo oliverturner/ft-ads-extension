@@ -1,7 +1,7 @@
 import type { VisibleKeysId } from "@/types/constants.d.ts";
 
-export function filterVisible(
-  src: Record<string, unknown>,
+export function filterVisible<T extends Record<string, unknown>>(
+  src: T,
   visibleKeysId: VisibleKeysId
 ) {
   const visibleKeys = VISIBLE_KEYS[visibleKeysId];

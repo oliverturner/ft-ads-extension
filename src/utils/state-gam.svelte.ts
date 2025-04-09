@@ -2,8 +2,8 @@ export type GAMStateProps = typeof gamState.state;
 
 class GAMState {
   state = $state<{
-    params: Record<string, unknown>;
-    custParams: Record<string, unknown>;
+    params: Record<string, string>;
+    custParams: Record<string, string>;
   }>({
     params: {},
     custParams: {},

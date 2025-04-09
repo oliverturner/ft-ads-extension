@@ -41,6 +41,7 @@ export const VISIBLE_KEYS = {
     "permutive",
     "pt",
     "res",
+    "slv",
     "topic"
   ],
 } as const;
