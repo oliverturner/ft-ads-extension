@@ -2,7 +2,7 @@
   "name": "ft-ads",
   "description": "An extension to inspect ads on FT.com",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte-inspector": "4.0.1",
